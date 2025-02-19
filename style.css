@@ -31,3 +31,33 @@ body {
 h2 {
   color: #5d4037;
 }
+
+/* Стили для выпадающего списка сортировки */
+#sort-news {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1em;
+  background-color: #fff8dc;
+  color: #5d4037;
+  border: 2px solid #5d4037;
+  border-radius: 10px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#sort-news:hover {
+  background-color: #f5e1a4;
+}
+
+#sort-news:focus {
+  outline: none;
+  box-shadow: 0 0 10px #8b0000;
+}
+
+/* Стили для заголовка выпадающего списка */
+label[for="sort-news"] {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #5d4037;
+  margin-right: 10px;
+}
