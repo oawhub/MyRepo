@@ -10,6 +10,12 @@
   <body>
     <header>
       <h1 class="magic-title">🧙‍♂️ Тридевятое Царство - Новости 📜</h1>
+      <label for="sort-news">Сортировать по:</label>
+      <select id="sort-news">
+        <option value="newest">Новые сначала</option>
+        <option value="oldest">Старые сначала</option>
+        <option value="popular">По популярности</option>
+      </select>
     </header>
     <main>
       <section class="news-container"></section>
@@ -50,39 +56,74 @@
         ];
 
         function getRandomDate() {
-          const start = new Date(2024, 0, 1); // 1 января 2024
-          const end = new Date(); // Сегодняшняя дата
+          const start = new Date(2024, 0, 1);
+          const end = new Date();
           const randomDate = new Date(
             start.getTime() + Math.random() * (end.getTime() - start.getTime())
           );
-          const day = String(randomDate.getDate()).padStart(2, "0");
-          const month = String(randomDate.getMonth() + 1).padStart(2, "0");
-          const year = randomDate.getFullYear();
-          return `${day}.${month}.${year}`;
+          return randomDate;
         }
 
-        const newsContainer = document.querySelector(".news-container");
-        newsContainer.innerHTML = "";
+        function getRandomPopularity() {
+          return Math.floor(Math.random() * 100) + 1;
+        }
 
+        // Добавляем дату и популярность к каждой новости
         newsData.forEach((news) => {
-          const article = document.createElement("article");
-          article.classList.add("news-item");
-
-          const title = document.createElement("h2");
-          title.textContent = news.title;
-
-          const date = document.createElement("p");
-          date.classList.add("news-date");
-          date.textContent = `📅 ${getRandomDate()}`;
-
-          const content = document.createElement("p");
-          content.textContent = news.content;
-
-          article.appendChild(title);
-          article.appendChild(date);
-          article.appendChild(content);
-          newsContainer.appendChild(article);
+          news.date = getRandomDate();
+          news.popularity = getRandomPopularity();
         });
+
+        function renderNews(sortedData) {
+          const newsContainer = document.querySelector(".news-container");
+          newsContainer.innerHTML = "";
+
+          sortedData.forEach((news) => {
+            const article = document.createElement("article");
+            article.classList.add("news-item");
+
+            const title = document.createElement("h2");
+            title.textContent = news.title;
+
+            const date = document.createElement("p");
+            date.classList.add("news-date");
+            date.textContent = `📅 ${news.date.toLocaleDateString("ru-RU")}`;
+
+            const popularity = document.createElement("p");
+            popularity.classList.add("news-popularity");
+            popularity.textContent = `🔥 Популярность: ${news.popularity}`;
+
+            const content = document.createElement("p");
+            content.textContent = news.content;
+
+            article.appendChild(title);
+            article.appendChild(date);
+            article.appendChild(popularity);
+            article.appendChild(content);
+            newsContainer.appendChild(article);
+          });
+        }
+
+        function sortNews(criteria) {
+          let sortedData = [...newsData];
+          if (criteria === "newest") {
+            sortedData.sort((a, b) => b.date - a.date);
+          } else if (criteria === "oldest") {
+            sortedData.sort((a, b) => a.date - b.date);
+          } else if (criteria === "popular") {
+            sortedData.sort((a, b) => b.popularity - a.popularity);
+          }
+          renderNews(sortedData);
+        }
+
+        document
+          .getElementById("sort-news")
+          .addEventListener("change", function () {
+            sortNews(this.value);
+          });
+
+        // Первоначальная загрузка новостей
+        sortNews("newest");
       });
     </script>
   </body>
