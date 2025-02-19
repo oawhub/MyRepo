@@ -49,6 +49,18 @@
           },
         ];
 
+        function getRandomDate() {
+          const start = new Date(2024, 0, 1); // 1 января 2024
+          const end = new Date(); // Сегодняшняя дата
+          const randomDate = new Date(
+            start.getTime() + Math.random() * (end.getTime() - start.getTime())
+          );
+          const day = String(randomDate.getDate()).padStart(2, "0");
+          const month = String(randomDate.getMonth() + 1).padStart(2, "0");
+          const year = randomDate.getFullYear();
+          return `${day}.${month}.${year}`;
+        }
+
         const newsContainer = document.querySelector(".news-container");
         newsContainer.innerHTML = "";
 
@@ -59,10 +71,15 @@
           const title = document.createElement("h2");
           title.textContent = news.title;
 
+          const date = document.createElement("p");
+          date.classList.add("news-date");
+          date.textContent = `📅 ${getRandomDate()}`;
+
           const content = document.createElement("p");
           content.textContent = news.content;
 
           article.appendChild(title);
+          article.appendChild(date);
           article.appendChild(content);
           newsContainer.appendChild(article);
         });
