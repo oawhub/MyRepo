@@ -1,98 +1,33 @@
-/* Основные стили */
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f4;
-}
-
-/* Шапка */
-header {
-  background: #333;
-  color: #fff;
+  font-family: "Fantasy", serif;
+  background-color: #f8f0e3;
+  color: #3e2723;
   text-align: center;
   padding: 20px;
-  animation: fadeInDown 1s ease-in-out;
 }
 
-/* Основной контент */
-.content {
+.magic-title {
+  font-size: 2.5em;
+  text-shadow: 2px 2px 5px #8b0000;
+  animation: glow 2s infinite alternate;
+}
+
+.news-container {
   display: flex;
-  justify-content: space-between;
-  padding: 20px;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Лента постов */
-.posts {
-  flex: 2;
-}
-
-.post {
-  background: white;
+.news-item {
+  background: #fff8dc;
+  border-radius: 15px;
   padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s, box-shadow 0.3s;
-  animation: fadeInUp 1s ease-in-out;
+  margin: 10px;
+  width: 60%;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 1s ease-in-out;
 }
 
-.post h2 {
-  margin: 0;
-  color: #333;
-}
-
-.post:hover {
-  transform: scale(1.02);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-}
-
-/* Боковая панель */
-.sidebar {
-  flex: 1;
-  margin-left: 20px;
-}
-
-.announcement,
-.ads {
-  background: white;
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  animation: fadeInRight 1s ease-in-out;
-}
-
-/* Анимации */
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
+h2 {
+  color: #5d4037;
 }
